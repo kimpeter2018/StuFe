@@ -131,7 +131,7 @@ class SettingsPageState extends ConsumerState<SettingsPage> {
                 SettingsTile(
                   icon: Icons.help_outline,
                   title: 'Help Center',
-                  subtitle: 'Common visa questions and guides',
+                  subtitle: 'Common questions and guides',
                   onTap: () => _launchUrl('https://stufe.help'),
                 ),
                 SettingsTile(
@@ -158,7 +158,7 @@ class SettingsPageState extends ConsumerState<SettingsPage> {
                       applicationIcon: const Icon(Icons.public),
                       children: [
                         const Text(
-                          'stufe helps you find, apply for, and manage your German visa easily.',
+                          'stufe helps you manage your student life efficiently. ',
                         ),
                       ],
                     );

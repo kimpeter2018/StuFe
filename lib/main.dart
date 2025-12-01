@@ -1,9 +1,7 @@
-import 'package:stufe/core/debug/debug_logger.dart';
 import 'package:stufe/features/app/app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 void main() async {
@@ -21,12 +19,12 @@ void main() async {
     debugPrint('Supabase init failed: $e');
   }
 
-  await GoogleSignIn.instance.initialize(
-    clientId:
-        "1095073134659-tcqd1cu08i6q2fpjd37oonl1auj33tqo.apps.googleusercontent.com",
-    serverClientId:
-        "1095073134659-hgpsioqua34ut9bls0jcaju38o33ura9.apps.googleusercontent.com",
-  );
+  // await GoogleSignIn.instance.initialize(
+  //   clientId:
+  //       "1095073134659-tcqd1cu08i6q2fpjd37oonl1auj33tqo.apps.googleusercontent.com",
+  //   serverClientId:
+  //       "1095073134659-hgpsioqua34ut9bls0jcaju38o33ura9.apps.googleusercontent.com",
+  // );
 
   runApp(const ProviderScope(child: App()));
 }
