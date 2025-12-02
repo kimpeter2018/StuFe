@@ -22,21 +22,15 @@ class _HomeLayoutState extends ConsumerState<HomeLayout> {
 
   static const List<Widget> _pages = [
     HomeScreen(),
-    FoodScreen(),
-    GroceryScreen(),
-    EventsScreen(),
-    MarketplaceScreen(),
     TimetableScreen(),
+    MarketplaceScreen(),
     SettingsPage(),
   ];
 
   static const List<String> _titles = [
     'Home',
-    'Food',
-    'Grocery Shares',
-    'Events',
-    'Marketplace',
     'Timetable',
+    'Marketplace',
     'Settings',
   ];
 

@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:stufe/features/events/view/events_screen.dart';
+import 'package:stufe/features/food/view/food_screen.dart';
+import 'package:stufe/features/grocery/view/grocery_screen.dart';
+import 'package:stufe/features/marketplace/view/marketplace_screen.dart';
 import '../../../data/fake/fake_data.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
 
-  @override
   Widget build(BuildContext context, WidgetRef ref) {
     return RefreshIndicator(
       onRefresh: () async {
@@ -19,27 +22,47 @@ class HomeScreen extends ConsumerWidget {
 
           const SizedBox(height: 24),
 
+          // Quick Access Cards
+          _buildQuickAccessSection(context),
+
+          const SizedBox(height: 24),
+
           // Quick Stats
           _buildQuickStats(),
 
           const SizedBox(height: 24),
 
           // Upcoming Events Preview
-          _buildSectionHeader('Upcoming Events', Icons.event, () {}),
+          _buildSectionHeader('Upcoming Events', Icons.event, () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => const EventsScreen()),
+            );
+          }),
           const SizedBox(height: 12),
           _buildUpcomingEvents(),
 
           const SizedBox(height: 24),
 
           // Active Grocery Shares
-          _buildSectionHeader('Grocery Shares', Icons.shopping_basket, () {}),
+          _buildSectionHeader('Grocery Shares', Icons.shopping_basket, () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => const GroceryScreen()),
+            );
+          }),
           const SizedBox(height: 12),
           _buildGroceryShares(),
 
           const SizedBox(height: 24),
 
           // Popular Restaurants
-          _buildSectionHeader('Popular Near You', Icons.restaurant, () {}),
+          _buildSectionHeader('Popular Near You', Icons.restaurant, () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => const FoodScreen()),
+            );
+          }),
           const SizedBox(height: 12),
           _buildRestaurants(),
 
@@ -389,6 +412,85 @@ class HomeScreen extends ConsumerWidget {
             ),
           );
         },
+      ),
+    );
+  }
+
+  Widget _buildQuickAccessSection(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        _buildQuickAccessCard(
+          context,
+          icon: Icons.event,
+          label: 'Events',
+          color: Colors.blue,
+          navigateTo: const EventsScreen(),
+        ),
+        _buildQuickAccessCard(
+          context,
+          icon: Icons.shopping_basket,
+          label: 'Grocery',
+          color: Colors.green,
+          navigateTo: const GroceryScreen(),
+        ),
+        _buildQuickAccessCard(
+          context,
+          icon: Icons.restaurant,
+          label: 'Food',
+          color: Colors.orange,
+          navigateTo: const FoodScreen(),
+        ),
+        _buildQuickAccessCard(
+          context,
+          icon: Icons.store,
+          label: 'Market',
+          color: Colors.purple,
+          navigateTo: const MarketplaceScreen(),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildQuickAccessCard(
+    BuildContext context, {
+    required IconData icon,
+    required String label,
+    required Color color,
+    Widget? navigateTo,
+  }) {
+    return GestureDetector(
+      onTap: navigateTo == null
+          ? null
+          : () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => navigateTo),
+              );
+            },
+      child: Container(
+        width: 70,
+        padding: const EdgeInsets.all(12),
+        decoration: BoxDecoration(
+          color: color.withOpacity(0.1),
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(color: color.withOpacity(0.3)),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(icon, color: color, size: 28),
+            const SizedBox(height: 6),
+            Text(
+              label,
+              style: TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.w600,
+                color: Colors.grey[800],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
